@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 
-class CharacteSerializers(serializers.ModelSerializer):
+class CharacteSerializer(serializers.ModelSerializer):
     class Meta:
         many = True
         model = Character

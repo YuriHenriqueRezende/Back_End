@@ -2,11 +2,15 @@ from django.shortcuts import render
 
 # Create your views here.from .models import *
 from .serializers import *
-from rest_framework.views import APIView
+from rest_framework.views import APIView # Manual #
+from rest_framework.viewsets import ModelViewSet # Automatico #
 from rest_framework.response import Response
 
 
-class CharacterAPIView(APIView):
+class CharacterAPIView(ModelViewSet):
+    queryset = Character.objects.all()
+    serializer_class = CharacteSerializer
+'''
     def get(self, request, CharacterId=''):
         # se o get não tiver o filtro de id:
         if CharacterId == '':
@@ -58,17 +62,27 @@ class CharacterAPIView(APIView):
                 return Response(status=200, data=SerializersCharacte.data)
             return Response(status=400, data='burro')
         return Response(status=400, data='faz direito animal')
+'''
+
+class LocationAPIView(ModelViewSet):
+    queryset = Location.objects.all()
+    serializer_class = Locationserializer
 
 
-class LocationAPIView(APIView):
+'''
     def get(self, request):
         LocationFound = Location.objects.all()
         serializer = Locationserializer(LocationFound, many=True)
         return Response(serializer.data)
+'''
 
+class EpisodeAPIView(ModelViewSet):
+    queryset = Episode.objects.all()
+    serializer_class = Episodeserializer
 
-class EpisodeAPIView(APIView):
+'''
     def get(self, request):
         EpisodeFound = Episode.objects.all()
         serializer = Episodeserializer(EpisodeFound, many=True)
         return Response(serializer.data)
+'''
