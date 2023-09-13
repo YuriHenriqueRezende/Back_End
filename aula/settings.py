@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'djoser',
-    'rest_framework.authtotekn',
+    'rest_framework.authtoken',
     'meuApp',
 ]
 
