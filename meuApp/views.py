@@ -6,13 +6,14 @@ from rest_framework.views import APIView # Manual #
 from rest_framework.viewsets import ModelViewSet # Automatico #
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-
+from rest_framework.permissions import IsAuthenticated
 
 class CharacterAPIView(ModelViewSet):
     queryset = Character.objects.all()
     serializer_class = CharacteSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['name']
+    permission_classes = (IsAuthenticated,)
 
 '''
     def get(self, request, CharacterId=''):
