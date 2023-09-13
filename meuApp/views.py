@@ -74,6 +74,8 @@ class LocationAPIView(ModelViewSet):
     serializer_class = Locationserializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['name']
+    permission_classes = (IsAuthenticated,)
+
 
 '''
     def get(self, request):
@@ -87,6 +89,8 @@ class EpisodeAPIView(ModelViewSet):
     serializer_class = Episodeserializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['name']
+    permission_classes = (IsAuthenticated,)
+
 
 '''
     def get(self, request):
