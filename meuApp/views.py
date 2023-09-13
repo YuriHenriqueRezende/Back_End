@@ -5,11 +5,15 @@ from .serializers import *
 from rest_framework.views import APIView # Manual #
 from rest_framework.viewsets import ModelViewSet # Automatico #
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class CharacterAPIView(ModelViewSet):
     queryset = Character.objects.all()
     serializer_class = CharacteSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
+
 '''
     def get(self, request, CharacterId=''):
         # se o get não tiver o filtro de id:
@@ -67,7 +71,8 @@ class CharacterAPIView(ModelViewSet):
 class LocationAPIView(ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = Locationserializer
-
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
 
 '''
     def get(self, request):
@@ -79,6 +84,8 @@ class LocationAPIView(ModelViewSet):
 class EpisodeAPIView(ModelViewSet):
     queryset = Episode.objects.all()
     serializer_class = Episodeserializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
 
 '''
     def get(self, request):
