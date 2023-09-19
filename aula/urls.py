@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include('meuApp.urls')),
     path('',include('djoser.urls')),
     path('auth/',include('djoser.urls.authtoken')),
-
+    path('auth/',include('djoser.urls.jwt')),
 ]
