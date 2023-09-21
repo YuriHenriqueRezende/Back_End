@@ -12,8 +12,8 @@ admin.site.register(usuario,admin_usuarios)
 
 class admin_registro(admin.ModelAdmin):
     list_display = ('id', 'nome_da_maquina','marca','status','data_do_defeito','chamado','comentarios','responsavel')
-    list_display_links = ('id','nome_da_maquina','status','responsavel')
-    search_fields = ['nome_da_maquina','status','responsavel']
+    list_display_links = ('id','nome_da_maquina')
+    search_fields = ['nome_da_maquina']
     list_per_page = 10
 
 admin.site.register(registro,admin_registro)
