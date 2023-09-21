@@ -4,7 +4,7 @@ from django.utils import timezone
 # Create your models here.
 class usuario(models.Model):
     nome = models.CharField(max_length=150, null=False)
-    cpf = models.DecimalField(max_digits=12, null=False)
+    CPF = models.IntegerField()
 
     def __str__(self):
         return self.nome
@@ -12,11 +12,11 @@ class usuario(models.Model):
 class registro(models.Model):
     nome_da_maquina = models.CharField(max_length=150, null=False)
     marca = models.CharField(max_length=150, null=False)
-    status = [("Q", "Quebrada"),
+    statu = [("Q", "Quebrada"),
               ("P", "Preventiva"),
               ("C", "Corretiva"),
               ("O", "OUTROS"),]
-    statu = models.CharField(max_length=1, choices=status, null=False)
+    status = models.CharField(max_length=1, choices=statu, null=False)
     data_do_defeito = models.DateTimeField(auto_now_add=False)
     chamado = models.DateTimeField(auto_now_add=True)
     comentarios = models.CharField(max_length=150, null=False)
