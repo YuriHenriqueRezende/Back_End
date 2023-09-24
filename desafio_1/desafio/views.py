@@ -10,22 +10,25 @@ class usuarioAPIView(APIView):
     def get(self, request, usuarioId = ''):
         if usuarioId == '':
             usuarioFould = ''
-            if 'nome' in request.GET:
+            if 'nome' in request.GET and 'CPF' in request.GET:
+                usuarioFould = usuario.objects.filter(nome__gt=request.GET['nome']).filter(CPF__contains=request.GET['CPF'])
+            elif 'nome' in request.GET:
                 usuarioFould = usuario.objects.filter(nome__gt=request.GET['nome'])
-#            else:
-#                usuarioFould = usuario.objects.all()
-
-            usuarioSerializerd = usuarioSerializer(usuarioFould, many=True)
-            return Response(usuarioSerializerd.data)
+            elif 'CPF' in request.GET:
+                usuarioFould = usuario.objects.filter(CPF__contains=request.GET['CPF'])
+            else:
+                usuarioFould = usuario.objects.all()
+                usuarioSerializerd = usuarioSerializer(usuarioFould, many=True)
+                return Response(usuarioSerializerd.data)            
         else:
             try:
                 usuarioFould = usuario.objects.get(id=usuarioId)
-                usuarioFould = usuarioSerializer(usuarioFould, many=False)
+                usuarioSerializerd = usuarioSerializer(usuarioFould, many=False)
                 return Response(usuarioSerializerd.data)
-            except usuario.DoesNotExist:
-                return Response(status=404, data='People Not Found')
+            except:
+                return Response(status=404, data='Usuario Not Found!')
 
-'''
+
 class registroPIView(APIView):
     def get(self, request, registroId = ''):
         if registroId == '':
@@ -39,4 +42,3 @@ class registroPIView(APIView):
                 return Response(registroSerialized.data)
             except:
                 return Response(status=404, data='Usuario Not Found!')
-'''
