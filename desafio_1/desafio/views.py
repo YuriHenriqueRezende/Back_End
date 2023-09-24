@@ -27,6 +27,38 @@ class usuarioAPIView(APIView):
                 return Response(usuarioSerializerd.data)
             except:
                 return Response(status=404, data='Usuario Not Found!')
+    
+    def post(self,request):
+        usuarioJson = request.data
+        usuarioSerializerd = usuarioSerializer(data=usuarioJson)
+        usuarioSerializerd.is_valid(raise_exception=True)
+        usuarioSerializerd.save()
+        return Response(status=201, data=usuarioSerializerd.data)
+
+    def put(self, request, usuarioId = ''):
+        usuarioFound = None
+
+        try:
+            usuarioFound = usuario.objects.get(id=usuarioId)
+        except usuario.DoesNotExist:
+            return Response(status=404,data='Usuario not Found!')
+
+        usuarioJson = request.data
+        usuarioSerializerd = usuarioSerializer(usuarioFound,data=usuarioJson)
+        usuarioSerializerd.is_valid(raise_exception=True)
+        usuarioSerializerd.save()
+        return Response(status=200,data=usuarioSerializerd.data)
+    
+    def delete(self,request, usuarioId = ''):
+        usuarioFound = None
+        try:
+            usuarioFound = usuario.objects.get(id=usuarioId)
+        except usuario.DoesNotExist:
+            return Response(status=404,data='Usuario Not Found!')
+        usuarioFound.delete()
+        return Response(status=200,data='Usuario successfully deleted!')
+    
+
 
 
 class registroPIView(APIView):
@@ -50,3 +82,33 @@ class registroPIView(APIView):
                 return Response(registroSerialized.data)
             except:
                 return Response(status=404, data='Usuario Not Found!')
+
+    def post(self,request):
+        registroJson = request.data
+        registroSerializerd = registroSerializer(data=registroJson)
+        registroSerializerd.is_valid(raise_exception=True)
+        registroSerializerd.save()
+        return Response(status=201, data=registroSerializerd.data)
+
+    def put(self, request, registroId = ''):
+        registroFound = None
+
+        try:
+            registroFound = registro.objects.get(id=registroId)
+        except registro.DoesNotExist:
+            return Response(status=404,data='Usuario not Found!')
+
+        registroJson = request.data
+        registroSerializerd = registroSerializer(registroFound,data=registroJson)
+        registroSerializerd.is_valid(raise_exception=True)
+        registroSerializerd.save()
+        return Response(status=200,data=registroSerializerd.data)
+
+    def delete(self,request, registroId = ''):
+        registroFound = None
+        try:
+            registroFound = registro.objects.get(id=registroId)
+        except registro.DoesNotExist:
+            return Response(status=404,data='Usuario Not Found!')
+        registroFound.delete()
+        return Response(status=200,data='Usuario successfully deleted!')
