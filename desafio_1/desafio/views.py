@@ -32,9 +32,17 @@ class usuarioAPIView(APIView):
 class registroPIView(APIView):
     def get(self, request, registroId = ''):
         if registroId == '':
-            registroFound = registro.objects.all()
-            registroSerialized = registroSerializer(registroFound, many=True)
-            return Response(registroSerialized.data)
+            registroId = ''
+            if 'nome_da_maquina' in request.GET and 'status' in request.GET:
+                registroFound = registro.objects.filter(nome_da_maquina__gt=request.GET['nome_da_maquina']).filter(status__contains=request.GET['status'])
+            elif 'nome_da_maquina' in request.GET:
+                registroFound = registro.objects.filter(nome_da_maquina__gt=request.GET['nome_da_maquina'])
+            elif 'status' in request.GET:
+                registroFound = registro.objects.filter(status__contains=request.GET['status'])
+            else:
+                registroFound = registro.objects.all()
+            registroSerializerd = registroSerializer(registroFound, many=True)
+            return Response(registroSerializerd.data)
         else:
             try:
                 registroFound = registro.objects.get(id=registroId)
