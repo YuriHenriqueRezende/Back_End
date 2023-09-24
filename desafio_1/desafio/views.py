@@ -18,8 +18,8 @@ class usuarioAPIView(APIView):
                 usuarioFould = usuario.objects.filter(CPF__contains=request.GET['CPF'])
             else:
                 usuarioFould = usuario.objects.all()
-                usuarioSerializerd = usuarioSerializer(usuarioFould, many=True)
-                return Response(usuarioSerializerd.data)            
+            usuarioSerializerd = usuarioSerializer(usuarioFould, many=True)
+            return Response(usuarioSerializerd.data)
         else:
             try:
                 usuarioFould = usuario.objects.get(id=usuarioId)
