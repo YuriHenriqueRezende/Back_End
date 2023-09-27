@@ -38,9 +38,7 @@ class cadastro_viagem_usuario(models.Model):
     viagem = models.ForeignKey(viagens, related_name="viagens", on_delete=models.CASCADE)
     data_do_inicio = models.DateField(auto_now_add=False)
     data_do_fim = models.DateField(auto_now_add=False)
-    def valor_final(self):
-        contagem = self.data_do_inicio + self.data_do_fim
-        return contagem + 150
+
     
     def __str__(self):
         return self.cadastro
