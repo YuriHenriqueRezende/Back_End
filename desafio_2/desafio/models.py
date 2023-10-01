@@ -3,6 +3,7 @@ from django.utils import timezone
 from datetime import timedelta
 # Create your models here.
 
+
 class cadastro(models.Model):
     nome = models.CharField(max_length=150, null=False)
     CPF = models.IntegerField()
