@@ -29,10 +29,26 @@ class admin_viagem(admin.ModelAdmin):
 
 admin.site.register(viagens,admin_viagem)
 
-class admin_cadastro_viagem(admin.ModelAdmin):
-    list_display = ('id', 'cadastro','viagem','data_do_inicio','data_do_fim','valor_final')
-    list_display_links = ('id','cadastro')
-    search_fields = ['cadastro']
+class admin_data(admin.ModelAdmin):
+    list_display = ('id','horario_inicio','horario_fim','lugar')
+    list_display_links = ('id','lugar')
+    search_fields = ['lugar']
     list_per_page = 10
 
-admin.site.register(cadastro_viagem_usuario,admin_cadastro_viagem)
+admin.site.register(horario,admin_data)
+
+class admin_pagamento(admin.ModelAdmin):
+    list_display = ('id','forma_de_pagamento','status','usuario','valor','registrado')
+    list_display_links = ('id','forma_de_pagamento')
+    search_fields = ['forma_de_pagamento']
+    list_per_page = 10
+
+admin.site.register(pagamento,admin_pagamento)
+
+class admin_reservas(admin.ModelAdmin):
+    list_display = ('id','nome','avaliacao')
+    list_display_links = ('id','nome')
+    search_fields = ['id']
+    list_per_page = 10
+
+admin.site.register(reservas,admin_reservas)

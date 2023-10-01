@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import timedelta
 # Create your models here.
 
 class cadastro(models.Model):
@@ -27,21 +28,40 @@ class viagens(models.Model):
     valor = models.IntegerField()
     endereço = models.CharField(max_length=150, null=False)
     cidade = models.CharField(max_length=150, null=False)
-    categoria = models.ForeignKey(categoria, related_name="categoria", on_delete=models.CASCADE)
+    categoria = models.ForeignKey(categoria, related_name="categoria", on_delete=models.CASCADE,blank=True)
 
     def __str__(self):
         return self.titulo
     
+class horario(models.Model):
+    horario_inicio = models.DateField(null=True)
+    horario_fim = models.DateField(null=True)
+    lugar = models.ForeignKey(viagens, related_name="viagens", on_delete=models.CASCADE,null=True,blank=True)
+    valor = models.IntegerField(blank=True, null=True)
 
-class cadastro_viagem_usuario(models.Model):
-    cadastro = models.ForeignKey(cadastro, related_name="cadastro", on_delete=models.CASCADE)
-    viagem = models.ForeignKey(viagens, related_name="viagens", on_delete=models.CASCADE)
-    data_do_inicio = models.DateField(auto_now_add=False)
-    data_do_fim = models.DateField(auto_now_add=False)
-
-    
     def __str__(self):
-        return self.cadastro
+        return (str(self.lugar))
 
 
+class pagamento(models.Model):
+    statu = [("P", "PIX"), ("D", "DEBITO"), ("C", "CREDITO"), ("B", "BOLETO"),]
+    forma_de_pagamento = models.CharField(max_length=1, choices=statu, null=False)
 
+    statuss = [("P", "PENDENTE"), ("A", "APROVADO"), ("R", "RECUSADO")]
+    status= models.CharField(max_length=1, choices=statuss, null=False)
+
+    usuario = models.ForeignKey(cadastro, related_name="cadastro", on_delete=models.CASCADE,null=True,blank=True)
+
+    registrado = models.ForeignKey(horario, related_name="horario", on_delete=models.CASCADE,null=True,blank=True)
+
+    valor = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return (str(self.usuario))
+
+class reservas(models.Model):
+    nome = models.ForeignKey(pagamento, related_name="pagamento", on_delete=models.CASCADE,null=True,blank=True)
+    avaliacao = models.TextField(null=True)
+
+    def __str__(self):
+        return (str(self.nome))
