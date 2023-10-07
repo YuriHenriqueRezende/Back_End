@@ -44,9 +44,9 @@ class admin_automovel(admin.ModelAdmin):
 admin.site.register(categoria_automovel,admin_automovel)
 
 class admin_manuntencao(admin.ModelAdmin):
-    list_display = ('id','automovel_fk','servico_fk','logistica_fk','funcionario_fk','mao_obra','sub_total')
-    list_display_links = ('id','sub_total')
-    search_fields = ['sub_total']
+    list_display = ('id','automovel_fk','get_servico','get_logistica','funcionario_fk','sub_total')
+    list_display_links = ('id','automovel_fk')
+    search_fields = ['automovel_fk']
     list_per_page = 10
 
 admin.site.register(manuntencao,admin_manuntencao)

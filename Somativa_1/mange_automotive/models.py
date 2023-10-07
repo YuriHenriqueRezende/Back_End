@@ -27,7 +27,7 @@ class funcionario(models.Model):
     
 class categoria_servico(models.Model):
     nome = models.CharField(max_length=50)
-    valor_obra = models.DecimalField(max_digits=10, decimal_places=0)
+    valor_obra = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.nome
@@ -37,8 +37,8 @@ class logistica_loja(models.Model):
     marca = models.CharField(max_length=50)
     patrimonio = models.DecimalField(max_digits=120, decimal_places=0)
     quantidade = models.DecimalField(max_digits=10, decimal_places=0)
-    valor_compra = models.DecimalField(max_digits=10, decimal_places=0)
-    valor_venda = models.DecimalField(max_digits=10, decimal_places=0)
+    valor_compra = models.DecimalField(max_digits=10, decimal_places=2)
+    valor_venda = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.nome
@@ -53,14 +53,26 @@ class categoria_automovel(models.Model):
     
 class manuntencao(models.Model):
     automovel_fk = models.ForeignKey(categoria_automovel, related_name='categoria_automovel', on_delete=models.CASCADE)
-    servico_fk = models.ForeignKey(categoria_servico, related_name='categoria_servico', on_delete=models.CASCADE)
-    logistica_fk = models.ForeignKey(logistica_loja, related_name='logistica_loja', on_delete=models.CASCADE)
+    servico_fk = models.ManyToManyField('categoria_servico', default=None, blank=True)
+    logistica_fk = models.ManyToManyField('logistica_loja', default=None, blank=True)
     funcionario_fk = models.ForeignKey(funcionario, related_name='funcionario', on_delete=models.CASCADE)
-    mao_obra = models.DecimalField(max_digits=10, decimal_places=0, null=True, blank=True)
-    sub_total = models.Count(servico_fk)
+    sub_total = models.DecimalField(max_digits=10,decimal_places=2,null=True, blank=True)
 
-    def __str__(self):
-        return (str(self.sub_total))
+    def get_servico(self):
+        return ",".join([str(p) for p in self.servico_fk.all()])
+    
+    def get_logistica(self):
+        return ",".join([str(s) for s in self.logistica_fk.all()])
+    
+    def save(self, *args, **kwargs):
+        valor = self.servico_fk.valor_obra
+        valor_1 = self.logistica_fk.valor_venda
+        valor_2 = self.mao_obra
+        self.sub_total = valor + valor_1 + valor_2
+        super(manuntencao, self).save(*args, **kwargs)
+    
+    def __unicode__(self):
+        return "{0}".format(self.automovel_fk)
 
 class posto_trabalho(models.Model):
     bloco = models.CharField(max_length=1)
