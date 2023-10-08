@@ -44,7 +44,7 @@ class admin_automovel(admin.ModelAdmin):
 admin.site.register(categoria_automovel,admin_automovel)
 
 class admin_manuntencao(admin.ModelAdmin):
-    list_display = ('id','automovel_fk','get_servico','get_logistica','funcionario_fk','sub_total')
+    list_display = ('id','automovel_fk','servico','logistica','funcionario_fk','mao_obra')
     list_display_links = ('id','automovel_fk')
     search_fields = ['automovel_fk']
     list_per_page = 10
@@ -68,7 +68,7 @@ class admin_pagamento(admin.ModelAdmin):
 admin.site.register(pagamento,admin_pagamento)
 
 class admin_reserva(admin.ModelAdmin):
-    list_display = ('id','nome_fk','posto_trabalho_fk','funcionario_fk','dia_reserva')
+    list_display = ('id','nome_fk','posto_trabalho_fk','dia_reserva')
     list_display_links = ('id','dia_reserva')
     search_fields = ['dia_reserva']
     list_per_page = 10
