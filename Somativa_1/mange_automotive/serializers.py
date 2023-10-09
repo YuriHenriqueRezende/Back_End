@@ -37,12 +37,6 @@ class categoria_automovelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class categoria_automovelSerializer(serializers.ModelSerializer):
-    class Meta:
-        many = True
-        model = categoria_automovel
-        fields = '__all__'
-
 
 class manuntencaoSerializer(serializers.ModelSerializer):
     class Meta:

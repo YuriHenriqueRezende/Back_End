@@ -105,7 +105,7 @@ class pagamento(models.Model):
     
     def __str__(self):
         return str(self.valor_total)
-
+    
 class reserva(models.Model):
     nome_fk = models.ForeignKey(usuario, related_name='usuario', on_delete=models.CASCADE)
     posto_trabalho_fk = models.ForeignKey(posto_trabalho, related_name='posto_trabalho', on_delete=models.CASCADE)
