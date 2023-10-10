@@ -7,13 +7,14 @@ from rest_framework.viewsets import ModelViewSet # Automatico #
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
+from .customFilters import * 
 
 
 class usuarioAPIView(ModelViewSet):
     queryset = usuario.objects.all()
     serializer_class = usuarioSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['nome']
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_class = CategoryUsuario    
 
 class funcionarioAPIView(ModelViewSet):
     queryset = funcionario.objects.all()
@@ -27,18 +28,18 @@ class categoria_servicoAPIView(ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['nome']
 
+
 class logistica_lojaAPIView(ModelViewSet):
     queryset = logistica_loja.objects.all()
     serializer_class = logistica_lojaSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['nome']
-
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_class = CategoryLogistica
 
 class categoria_automovelAPIView(ModelViewSet):
     queryset = categoria_automovel.objects.all()
     serializer_class = categoria_automovelSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['modelo']
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_class = CategoryAutomovel
 
 class manuntencaoAPIView(ModelViewSet):
     queryset = manuntencao.objects.all()
