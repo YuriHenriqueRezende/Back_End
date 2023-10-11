@@ -6,7 +6,7 @@ from rest_framework.views import APIView # Manual #
 from rest_framework.viewsets import ModelViewSet # Automatico #
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import IsAuthenticated, DjangoModelPermissionsOrAnonReadOnly
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissionsOrAnonReadOnly 
 from .customFilters import * 
 
 
