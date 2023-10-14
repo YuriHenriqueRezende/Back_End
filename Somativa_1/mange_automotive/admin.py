@@ -12,9 +12,9 @@ class admin_usuario(admin.ModelAdmin):
 admin.site.register(usuario,admin_usuario)
 
 class admin_fucionario(admin.ModelAdmin):
-    list_display = ('id', 'funcionario','cpf','nif','email','telefone')
-    list_display_links = ('id','funcionario')
-    search_fields = ['funcionario']
+    list_display = ('id', 'nome','cpf','nif','email','telefone')
+    list_display_links = ('id','nome')
+    search_fields = ['nome']
     list_per_page = 10
 
 admin.site.register(funcionario,admin_fucionario)
@@ -36,8 +36,8 @@ class admin_logistica(admin.ModelAdmin):
 admin.site.register(logistica_loja,admin_logistica)
 
 class admin_automovel(admin.ModelAdmin):
-    list_display = ('id','modelo','marca','ano')
-    list_display_links = ('id','modelo')
+    list_display = ('id','modelo','marca','ano','dono')
+    list_display_links = ('id','modelo',)
     search_fields = ['modelo']
     list_per_page = 10
 
@@ -68,7 +68,7 @@ class admin_pagamento(admin.ModelAdmin):
 admin.site.register(pagamento,admin_pagamento)
 
 class admin_reserva(admin.ModelAdmin):
-    list_display = ('id','nome_fk','posto_trabalho_fk','dia_reserva')
+    list_display = ('id','manuntencao_fk','posto_trabalho_fk','dia_reserva')
     list_display_links = ('id','dia_reserva')
     search_fields = ['dia_reserva']
     list_per_page = 10

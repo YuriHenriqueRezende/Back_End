@@ -14,61 +14,60 @@ class usuarioAPIView(ModelViewSet):
     queryset = usuario.objects.all()
     serializer_class = usuarioSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
-    filterset_class = CategoryUsuario    
-    permission_classes = (IsAuthenticated,)
+    filterset_class = CategoryUsuario
 
 class funcionarioAPIView(ModelViewSet):
     queryset = funcionario.objects.all()
     serializer_class = funcionarioSerializer
     filter_backends = [DjangoFilterBackend]
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,) 
 
 class categoria_servicoAPIView(ModelViewSet):
     queryset = categoria_servico.objects.all()
     serializer_class = categoria_servicoSerializer
     filter_backends = [DjangoFilterBackend]
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
 
 class logistica_lojaAPIView(ModelViewSet):
     queryset = logistica_loja.objects.all()
     serializer_class = logistica_lojaSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class = CategoryLogistica
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
 
 class categoria_automovelAPIView(ModelViewSet):
     queryset = categoria_automovel.objects.all()
     serializer_class = categoria_automovelSerializer
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class = CategoryAutomovel
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
 
 class manuntencaoAPIView(ModelViewSet):
     queryset = manuntencao.objects.all()
     serializer_class = manuntencaoSerializer
     filter_backends = [DjangoFilterBackend]
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
 
 class posto_trabalhoAPIView(ModelViewSet):
     queryset = posto_trabalho.objects.all()
     serializer_class = posto_trabalhoSerializer
     filter_backends = [DjangoFilterBackend]
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
 
 class pagamentoAPIView(ModelViewSet):
     queryset = pagamento.objects.all()
     serializer_class = posto_trabalhoSerializer
     filter_backends = [DjangoFilterBackend]
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)   
 
 class reservaAPIView(ModelViewSet):
     queryset = reserva.objects.all()
     serializer_class = reservaSerializer
     filter_backends = [DjangoFilterBackend]
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)   

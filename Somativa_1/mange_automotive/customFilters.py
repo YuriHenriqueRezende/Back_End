@@ -4,11 +4,10 @@ from .models import *
 
 class CategoryUsuario(django_filters.FilterSet):
     nome = django_filters.CharFilter(lookup_expr='icontains')
-    email = django_filters.CharFilter(lookup_expr='icontains')
 
     class Meta:
         model = usuario
-        fields = ['nome','email']
+        fields = ['nome']
 
 
 class CategoryLogistica(django_filters.FilterSet):

@@ -12,29 +12,18 @@ class usuario(models.Model):
     cpf = models.DecimalField(max_digits=10, decimal_places=0)
 
     def __str__(self):
-        return self.nome.get_full_name
-
-@receiver(post_save, sender=User)
-def create_usuario(sender, instance, created, **kwargs):
-    if created:
-        usuario.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_usuario(sender, instance, created, **kwargs):
-    instance.usuario.save()
-
+        return str(self.nome)
 
 
 class funcionario(models.Model):
-    nome = models.CharField(max_length=50)
+    nome = models.OneToOneField(User,on_delete=models.CASCADE)
     cpf = models.DecimalField(max_digits=10, decimal_places=0)
     nif = models.DecimalField(max_digits=10, decimal_places=0)
     email = models.EmailField()
     telefone = models.DecimalField(max_digits=11, decimal_places=0)
 
     def __str__(self):
-        return self.nome
-    
+        return str(self.nome)    
     
 class categoria_servico(models.Model):
     nome = models.CharField(max_length=50)
@@ -58,6 +47,7 @@ class categoria_automovel(models.Model):
     modelo = models.CharField(max_length=50)
     marca = models.CharField(max_length=50)
     ano = models.DecimalField(max_digits=5, decimal_places=0)
+    dono = models.ForeignKey(usuario, related_name='usuario', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.modelo
@@ -117,10 +107,10 @@ class pagamento(models.Model):
         return str(self.valor_total)
     
 class reserva(models.Model):
-    nome_fk = models.ForeignKey(usuario, related_name='u', on_delete=models.CASCADE)
+    manuntencao_fk = models.ForeignKey(manuntencao, related_name='manu', on_delete=models.CASCADE, blank=True, null=True)
     posto_trabalho_fk = models.ForeignKey(posto_trabalho, related_name='posto_trabalho', on_delete=models.CASCADE)
     dia_reserva = models.DateField()
 
     def __str__(self):
-        return str(self.nome_fk)
+        return str(self.manuntencao_fk.automovel_fk.dono)
 
