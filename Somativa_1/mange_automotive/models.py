@@ -6,16 +6,25 @@ from django.db.models.signals import post_save
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
-
 class usuario(models.Model):
-    nome = models.CharField(max_length=50)
+    nome = models.OneToOneField(User,on_delete=models.CASCADE)
+    telefone = models.DecimalField(max_digits=11, decimal_places=0)  
     cpf = models.DecimalField(max_digits=10, decimal_places=0)
-    email = models.EmailField()
-    telefone = models.DecimalField(max_digits=11, decimal_places=0)
 
     def __str__(self):
-        return self.nome
-    
+        return self.nome.get_full_name
+
+@receiver(post_save, sender=User)
+def create_usuario(sender, instance, created, **kwargs):
+    if created:
+        usuario.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_usuario(sender, instance, created, **kwargs):
+    instance.usuario.save()
+
+
+
 class funcionario(models.Model):
     nome = models.CharField(max_length=50)
     cpf = models.DecimalField(max_digits=10, decimal_places=0)
@@ -25,6 +34,7 @@ class funcionario(models.Model):
 
     def __str__(self):
         return self.nome
+    
     
 class categoria_servico(models.Model):
     nome = models.CharField(max_length=50)
@@ -107,7 +117,7 @@ class pagamento(models.Model):
         return str(self.valor_total)
     
 class reserva(models.Model):
-    nome_fk = models.ForeignKey(usuario, related_name='usuario', on_delete=models.CASCADE)
+    nome_fk = models.ForeignKey(usuario, related_name='u', on_delete=models.CASCADE)
     posto_trabalho_fk = models.ForeignKey(posto_trabalho, related_name='posto_trabalho', on_delete=models.CASCADE)
     dia_reserva = models.DateField()
 

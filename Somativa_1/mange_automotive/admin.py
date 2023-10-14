@@ -4,7 +4,7 @@ from .models import *
 
 # Register your models here.
 class admin_usuario(admin.ModelAdmin):
-    list_display = ('id', 'nome','cpf','email','telefone')
+    list_display = ('id', 'nome','cpf','telefone')
     list_display_links = ('id','nome')
     search_fields = ['nome']
     list_per_page = 10
@@ -12,9 +12,9 @@ class admin_usuario(admin.ModelAdmin):
 admin.site.register(usuario,admin_usuario)
 
 class admin_fucionario(admin.ModelAdmin):
-    list_display = ('id', 'nome','cpf','nif','email','telefone')
-    list_display_links = ('id','nome')
-    search_fields = ['nome']
+    list_display = ('id', 'funcionario','cpf','nif','email','telefone')
+    list_display_links = ('id','funcionario')
+    search_fields = ['funcionario']
     list_per_page = 10
 
 admin.site.register(funcionario,admin_fucionario)
