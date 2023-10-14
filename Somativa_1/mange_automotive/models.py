@@ -3,8 +3,9 @@ Bom tem muitas coisas para eu melhorar no back_end na questao dos models, mas oq
 gastei mais tempo pensando foi nas automações, tipo fazer soma, eu nao sei falar para o meu back_end que
 nao existe apenas 1 problema no carro e sim varios e com isso somar os valores dos preçoes e a mao de obra
 isso eu nao soube aplicar no projeto.
-Eu gastei bastante tempo tentando ver meu projeto funcionando no front do Django mas percebi que tava
+Eu gastei bastante tempo tentando vendo SE meu projeto ESTA funcionando no front do Django mas percebi que tava
 perdendo a linha, entao comecei a aplicar json (insonimia).
+
 '''
 
 from django.db import models
