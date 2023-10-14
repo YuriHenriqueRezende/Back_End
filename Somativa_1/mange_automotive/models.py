@@ -5,6 +5,9 @@ nao existe apenas 1 problema no carro e sim varios e com isso somar os valores d
 isso eu nao soube aplicar no projeto.
 Eu gastei bastante tempo tentando vendo SE meu projeto ESTA funcionando no front do Django mas percebi que tava
 perdendo a linha, entao comecei a aplicar json (insonimia).
+Sendo sincero essa avaliação eu tentei fazer com os materiais que tinha, o uso da internet foi mais para entender
+o funcionamento como as documentacoes e bugs eu sempre procuro pelo Stack Overflow, enfase em ingles. Me recuso a tirar duvidas fora
+do horario de aula. 
 
 '''
 
