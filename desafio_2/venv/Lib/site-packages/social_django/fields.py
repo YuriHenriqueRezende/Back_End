@@ -21,7 +21,7 @@ if JSONFIELD_ENABLED:
             from django.utils.module_loading import import_string
         except ImportError:
             from importlib import import_module as import_string
-        JSONField = import_string(JSONFIELD_CUSTOM)
+        JSONFieldBase = import_string(JSONFIELD_CUSTOM)
     else:
         try:
             from django.db.models import JSONField

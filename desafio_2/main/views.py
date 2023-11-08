@@ -47,7 +47,7 @@ class CategoryView(ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class  = CategoryFilter
     ordering_fields = '__all__'
-    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)   
+    # permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)   
 
 
 class TripView(ModelViewSet):
@@ -56,12 +56,12 @@ class TripView(ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class  = TripFilter
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticatedOrReadOnly,)   
+    # permission_classes = (IsAuthenticatedOrReadOnly,)   
 
 class ImageView(CustomModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)   
+    # permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)   
 
 class CustomUserView(ModelViewSet):
     queryset = CustomUser.objects.all()
@@ -76,7 +76,7 @@ class BookingView(ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class  = BookingFilter
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)   
+    # permission_classes = (IsAuthenticated,)   
 
 
     def create(self, request, *args, **kwargs): 
@@ -115,7 +115,7 @@ class PaymentView(ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class  = PaymentFilter
     ordering_fields = '__all__'
-    permission_classes = (IsAuthenticated,)   
+    # permission_classes = (IsAuthenticated,)   
     
     def get_queryset(self):
         user = self.request.user
@@ -134,4 +134,4 @@ class AvailabilityView(CustomModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_class  = AvailabilityFilter
     ordering_fields = '__all__' 
-    permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)  
+    # permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)  
