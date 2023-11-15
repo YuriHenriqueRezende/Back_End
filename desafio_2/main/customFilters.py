@@ -55,7 +55,9 @@ class PaymentFilter(django_filters.FilterSet):
 
 class AvailabilityFilter(django_filters.FilterSet):
    date = django_filters.RangeFilter()
+   tripFk = django_filters.NumberFilter()
+   onlyAvailable = django_filters.BooleanFilter(field_name='bookingFK', lookup_expr='isnull')
 
    class Meta:
       model = Availability
-      fields = ['date']
+      fields = ['date','tripFK','onlyAvailable']
