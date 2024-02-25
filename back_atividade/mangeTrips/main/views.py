@@ -170,6 +170,7 @@ class ChatBotAPIView(APIView):
             newHistory = ConversationHistory(user=userFound)
             newHistory.save()
             conversationFound = newHistory
+            
         #contexto de uma conversa já existente (front enviou o conversationId)
         #checa se a conversa existe
         else:
@@ -187,7 +188,7 @@ class ChatBotAPIView(APIView):
         finalMessage = answer.message
 
         newAnswer = None
-        if conversationFound.lastCommand == 'SEARCH_TRIP':
+        if conversationFound.lastCommand == 'SEARCH_TRIP': # FAZ ESSE AQUI
             trips = Trip.objects.filter(Q(title__icontains=question) | Q(description__icontains=question) | Q(city__icontains=question))
             if trips.exists():
                 finalMessage = convertToMessage(trips,'title')

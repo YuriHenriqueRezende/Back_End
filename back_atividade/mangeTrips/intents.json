@@ -48,6 +48,25 @@
                 "Certo, para onde iremos então?"
             ],            
             "command": "SEARCH_TRIP"
+        },
+        {
+            "tag": "imagem",
+            "patterns": [
+                "Me mostre imagem",
+                "imagens",
+                "Quero ver as imagens",
+                "fotos",
+                "Quero ver as fotos ",
+                "filtrar fotos",
+                "filtar imagem",
+                "imagem",
+                "foto",
+                "Como é"
+            ],
+            "responses": [
+                "Legal, que lugar para mostrarmos as imagens?"
+            ],            
+            "command": "SEARCH_IMAGE"
         }
         
     ]
