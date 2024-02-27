@@ -11,7 +11,7 @@
                 "Olá, sou o assistente talllll, como posso te ajudar?",
                 "Oi, no que posso ser útil?"
             ],
-            "required": "\n Ou se preferir digite alguma dessas opções: -Procurar uma Viagem -Listar viagens, -Pagamentos, -Minhas Reservas"            
+            "required": "\n Ou se preferir digite alguma dessas opções: -Procurar uma Viagem -Listar viagens, -Ver as Fotos dos lugares"            
         },
         {
             "tag": "listar",

@@ -188,11 +188,11 @@ class ChatBotAPIView(APIView):
         finalMessage = answer.message
 
         newAnswer = None
-        if conversationFound.lastCommand == 'SEARCH_TRIP': # FAZ ESSE AQUI
+        if conversationFound.lastCommand == 'SEARCH_TRIP': 
             trips = Trip.objects.filter(Q(title__icontains=question) | Q(description__icontains=question) | Q(city__icontains=question))
             if trips.exists():
                 finalMessage = convertToMessage(trips,'title')
-            else:                
+            else:               
                 finalMessage = 'Infelizmente não encontramos a viagem que procura =/'
             newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
 
@@ -206,8 +206,18 @@ class ChatBotAPIView(APIView):
             conversationFound.save()
             newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
         
+        if answer.command == 'SEARCH_IMAGE':
+            image = Image.objects.all()
+            if image.exists():
+                finalMessage = convertToMessage(image,'title')
+        else:
+            #atualiza o último comando interpretado pela I.A.
+            conversationFound.lastCommand = answer.command
+            conversationFound.save()
+            newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
+
+            
         newAnswer.save()
-        
         serializedAnswer = ConversationSerializer(newAnswer,many=False)
                
         return JsonResponse(status=201, data=serializedAnswer.data)
