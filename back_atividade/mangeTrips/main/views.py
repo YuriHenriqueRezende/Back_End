@@ -19,6 +19,9 @@ from django.http import JsonResponse
 
 from django.core.exceptions import ObjectDoesNotExist
 
+from rest_framework import generics
+
+
 def strToDate(strDate):
     return datetime.strptime(strDate, '%Y-%m-%d').date()
 
@@ -139,6 +142,13 @@ class AvailabilityView(CustomModelViewSet):
     filterset_class  = AvailabilityFilter
     ordering_fields = '__all__' 
     # permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)  
+
+class UserConversationHistoryListView(generics.ListAPIView):
+    serializer_class = ConversationHistorySerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return ConversationHistory.objects.filter(user__id=user_id)
 
 
 def convertToMessage(data,attributeName):
