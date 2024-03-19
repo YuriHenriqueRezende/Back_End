@@ -236,9 +236,6 @@ class ChatBotAPIView(APIView):
                 finalMessage += "Digite 'Menu' para ir ao menu."
             newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
         
-            
-
-            
         newAnswer.save()
         serializedAnswer = ConversationSerializer(newAnswer,many=False)
                
