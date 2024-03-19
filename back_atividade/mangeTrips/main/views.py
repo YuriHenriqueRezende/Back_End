@@ -149,6 +149,13 @@ class UserConversationHistoryListView(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return ConversationHistory.objects.filter(user__id=user_id)
+    
+class ConversationListView(generics.ListAPIView):
+    serializer_class = ConversationSerializer
+
+    def get_queryset(self):
+        history_id = self.kwargs['history_id']
+        return Conversation.objects.filter(history__id=history_id)
 
 
 def convertToMessage(data,attributeName):
