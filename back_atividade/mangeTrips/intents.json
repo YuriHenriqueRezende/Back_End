@@ -8,10 +8,10 @@
                 "Como vai?"
             ],
             "responses": [
-                "Olá, sou o assistente talllll, como posso te ajudar?",
+                "Olá, sou o assistente, como posso te ajudar?",
                 "Oi, no que posso ser útil?"
             ],
-            "required": "\n Ou se preferir digite alguma dessas opções: -Procurar uma Viagem -Listar viagens, -Ver as Fotos dos lugares"            
+            "required": "\n Ou se preferir digite alguma dessas opções: -Procurar uma Viagem, -Listar viagens, -Ver as Fotos dos lugares, -Ver Categorias"            
         },
         {
             "tag": "listar",
@@ -67,6 +67,23 @@
                 "Legal, que lugar para mostrarmos as imagens?"
             ],            
             "command": "SEARCH_IMAGE"
+        },
+        {
+            "tag": "categoria",
+            "patterns": [
+                "Me mostre categoria",
+                "categorias",
+                "Quero ver as categoria",
+                "categorias",
+                "Quero ver os tipo ",
+                "tipos",
+                "filtar categoria",
+                "Como é categoria"
+            ],
+            "responses": [
+                "Legal, que lugar para mostrarmos as categorias?"
+            ],            
+            "command": "SEARCH_CATEGORY"
         }
         
     ]

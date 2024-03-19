@@ -192,13 +192,19 @@ class ChatBotAPIView(APIView):
             trips = Trip.objects.filter(Q(title__icontains=question) | Q(description__icontains=question) | Q(city__icontains=question))
             if trips.exists():
                 finalMessage = convertToMessage(trips,'title')
+                finalMessage += "Digite 'Voltar' para voltar."
+                finalMessage += "Digite 'Menu' para ir ao menu."
             else:               
                 finalMessage = 'Infelizmente não encontramos a viagem que procura =/'
+                finalMessage += "Digite 'Voltar' para voltar."
+                finalMessage += "Digite 'Menu' para ir ao menu."
             newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
 
         elif answer.command == 'LIST_TRIPS':
             trips = Trip.objects.all()
             finalMessage += convertToMessage(trips,'title')
+            finalMessage += "Digite 'Voltar' para voltar."
+            finalMessage += "Digite 'Menu' para ir ao menu."
             newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
         else:
             #atualiza o último comando interpretado pela I.A.
@@ -207,14 +213,30 @@ class ChatBotAPIView(APIView):
             newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
         
         if answer.command == 'SEARCH_IMAGE':
-            image = Image.objects.all()
+            image = Image.objects.filter()
             if image.exists():
-                finalMessage = convertToMessage(image,'title')
-        else:
-            #atualiza o último comando interpretado pela I.A.
-            conversationFound.lastCommand = answer.command
-            conversationFound.save()
-            newAnswer = Conversation(type="A",message=finalMessage if answer.additionalMessage is None else finalMessage + '\n' + answer.additionalMessage ,history=conversationFound)
+                finalMessage = convertToMessage(image,'link')
+                finalMessage += "Digite 'Voltar' para voltar."
+                finalMessage += "Digite 'Menu' para ir ao menu."
+            else:               
+                finalMessage = 'Infelizmente não encontramos a imagem da viagem que procura =/'
+                finalMessage += "Digite 'Voltar' para voltar."
+                finalMessage += "Digite 'Menu' para ir ao menu."
+            newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
+
+        if answer.command == 'SEARCH_CATEGORY':
+            cat = Category.objects.filter()
+            if cat.exists():
+                finalMessage = convertToMessage(cat,'name')
+                finalMessage += "Digite 'Voltar' para voltar."
+                finalMessage += "Digite 'Menu' para ir ao menu."
+            else:               
+                finalMessage = 'Infelizmente não encontramos a imagem da viagem que procura =/'
+                finalMessage += "Digite 'Voltar' para voltar."
+                finalMessage += "Digite 'Menu' para ir ao menu."
+            newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
+        
+            
 
             
         newAnswer.save()
