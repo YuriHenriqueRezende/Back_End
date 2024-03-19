@@ -84,6 +84,16 @@
                 "Legal, que lugar para mostrarmos as categorias?"
             ],            
             "command": "SEARCH_CATEGORY"
+        },
+        {
+            "tag": "return",
+            "patterns": [
+                "Voltar",
+                "voltar",
+                "Menu",
+                "menu"
+            ],
+            "command": "question"
         }
         
     ]

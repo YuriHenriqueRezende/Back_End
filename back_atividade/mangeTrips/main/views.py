@@ -157,7 +157,7 @@ class ChatBotAPIView(APIView):
         userId = data.get('userId')
         
         userFound = None
-        #checa se o usuário existe
+        # checa se o usuário existe
         try:
             userFound = User.objects.get(pk=userId)
         except ObjectDoesNotExist:
@@ -165,25 +165,25 @@ class ChatBotAPIView(APIView):
 
         conversationFound = None
 
-        #nova conversa!
+        # nova conversa!
         if conversationId is None:
             newHistory = ConversationHistory(user=userFound)
             newHistory.save()
             conversationFound = newHistory
             
-        #contexto de uma conversa já existente (front enviou o conversationId)
-        #checa se a conversa existe
+        # contexto de uma conversa já existente (front enviou o conversationId)
+        # checa se a conversa existe
         else:
             try:
                 conversationFound = ConversationHistory.objects.get(pk=conversationId)
             except ObjectDoesNotExist:
                 return JsonResponse(status=500,data={'content': 'Conversa não encontrada!'})
 
-        #salva a pergunta no banco, linkando com o histórico
+        # salva a pergunta no banco, linkando com o histórico
         newQuestion = Conversation(type="Q",message=question,history=conversationFound)
         newQuestion.save()
         
-        #chama a I.A.
+        # chama a I.A.
         answer = chat.get_response(question)
         finalMessage = answer.message
 
@@ -192,12 +192,10 @@ class ChatBotAPIView(APIView):
             trips = Trip.objects.filter(Q(title__icontains=question) | Q(description__icontains=question) | Q(city__icontains=question))
             if trips.exists():
                 finalMessage = convertToMessage(trips,'title')
-                finalMessage += "Digite 'Voltar' para voltar."
-                finalMessage += "Digite 'Menu' para ir ao menu."
+                finalMessage += "\nSe deseja voltar ao menu anterior, digite 'Voltar'."
+                finalMessage += "\nSe deseja voltar ao menu principal, digite 'Menu'."
             else:               
                 finalMessage = 'Infelizmente não encontramos a viagem que procura =/'
-                finalMessage += "Digite 'Voltar' para voltar."
-                finalMessage += "Digite 'Menu' para ir ao menu."
             newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
 
         elif answer.command == 'LIST_TRIPS':
@@ -235,9 +233,12 @@ class ChatBotAPIView(APIView):
                 finalMessage += "Digite 'Voltar' para voltar."
                 finalMessage += "Digite 'Menu' para ir ao menu."
             newAnswer = Conversation(type="A",message=finalMessage,history=conversationFound)
-        
+
         newAnswer.save()
         serializedAnswer = ConversationSerializer(newAnswer,many=False)
                
         return JsonResponse(status=201, data=serializedAnswer.data)
+    
+
+
 
