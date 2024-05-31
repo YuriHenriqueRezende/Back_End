@@ -113,8 +113,8 @@ class pagamento(models.Model):
         valor1 = str(self.manuntencao_fk.servico_fk)
         valor2 = str(self.manuntencao_fk.mao_obra)
         valor3 = str(valor1 + valor2)
-        valor4 = str(valor3 - self.desconto)
-        return self.valor_total + valor4
+        valor4 = str(valor3 - self.desconto) # type: ignore
+        return self.valor_total + valor4 # type: ignore
     
     def __str__(self):
         return str(self.valor_total)
@@ -125,5 +125,5 @@ class reserva(models.Model):
     dia_reserva = models.DateField()
 
     def __str__(self):
-        return str(self.manuntencao_fk.automovel_fk.dono)
+        return str(self.manuntencao_fk.automovel_fk.dono) # type: ignore
 
