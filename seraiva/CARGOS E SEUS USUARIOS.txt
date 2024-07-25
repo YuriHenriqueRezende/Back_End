@@ -1,0 +1,27 @@
+ADMIN:
+admin@admin.com
+admin
+
+BIBLIOTECARIO:
+rodrigo@senai.com
+@Admin1234
+
+AUTORES(a):
+JeffKinney@seila.com
+@Admin1234
+
+StephenieMeyer@yahoo.com
+@Admin1234
+
+KaiBird@outlook.com
+@Admin1234
+
+J.K.Rowling@admin.com
+@Admin1234
+
+
+USUARIO:
+andre@admin.com
+@Admin1234
+
+EU TENTEI FAZER OS VERCEL E RAILWAY MAS SEM SUCESSO
